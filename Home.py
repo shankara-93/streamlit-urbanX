@@ -31,7 +31,7 @@ DEFAULT_CRS = "EPSG:4326"
 DEFAULT_CENTER = [52.06, 5.20]
 DEFAULT_ZOOM = 15
 DEFAULT_BASEMAP = "CartoDB.Positron"
-LOGO_PATH =  r".\Ref_images\Artix_Print.png" # Use relative path if logo is in the same directory
+LOGO_PATH =  r"./Ref_images/Artix_Print.png" # Use relative path if logo is in the same directory
 
 # --- Configuration ---
 # It's better to use environment variables for sensitive URLs in production
@@ -512,20 +512,20 @@ def main() -> None:
                     # parse_api_response should also show st.error on its own failures
                     parsed_data = parse_api_response(api_response_json)
                     if parsed_data and isinstance(parsed_data, tuple):
-                        st.write(f"--- DEBUG: Parsed data length: {len(parsed_data)}")
-                        st.write(f"--- DEBUG: Type of parsed_data[0] (metadata): {type(parsed_data[0]) if len(parsed_data) > 0 else 'N/A'}")
+                        logger.info(f"--- DEBUG: Parsed data length: {len(parsed_data)}")
+                        logger.info(f"--- DEBUG: Type of parsed_data[0] (metadata): {type(parsed_data[0]) if len(parsed_data) > 0 else 'N/A'}")
                     else:
-                        st.write(f"--- DEBUG: Parsed data is not a tuple or is None.")
+                        logger.info(f"--- DEBUG: Parsed data is not a tuple or is None.")
                 except Exception as e_parse:
                     st.error(f"--- DEBUG: CRITICAL ERROR during parse_api_response call: {e_parse}")
                     logger.error(f"Exception directly calling parse_api_response: {e_parse}", exc_info=True)
                     # parsed_data remains None
                     
                 analysis_metadata = parsed_data[0] if parsed_data and isinstance(parsed_data, tuple) and len(parsed_data) > 0 else None
-                st.write(f"--- DEBUG: Analysis metadata after parsing (type): {type(analysis_metadata)}")
+                #st.write(f"--- DEBUG: Analysis metadata after parsing (type): {type(analysis_metadata)}")
 
                 if analysis_metadata is not None: # Crucial check
-                    st.write("--- DEBUG: Analysis metadata is not None. Storing results in session state.")
+                    #st.write("--- DEBUG: Analysis metadata is not None. Storing results in session state.")
                     st.session_state.api_processed_data = {
                         "analysis_metadata": analysis_metadata,
                         "gdf_occupied": parsed_data[1] if parsed_data and len(parsed_data) > 1 else None,
