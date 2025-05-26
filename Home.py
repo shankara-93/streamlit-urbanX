@@ -344,7 +344,7 @@ def display_metrics(analysis_metadata: Dict) -> None:
             st.markdown(" ")
             row1_cols = st.columns(2)
             row1_cols[0].metric(label="Area Name/City", value=city_name)
-            row1_cols[1].metric(label="# Parking Spaces Defined", value=num_parking)
+            row1_cols[1].metric(label="Parking Lots", value=num_parking)
             row2_cols = st.columns(2)
             row2_cols[0].metric(label="Est. Total Capacity", value=parking_capacity)
             row2_cols[1].metric(label="Total Parking Area (m²)", value=f"{total_parking_area:.1f}" if isinstance(total_parking_area, (int, float)) else "N/A" )
@@ -360,7 +360,7 @@ def display_metrics(analysis_metadata: Dict) -> None:
             met_row2_cols[0].metric(label="# Occupied Spaces", value=total_occupied_cars)
             met_row2_cols[1].metric(label="Avg Occ/Area", value=f"{avg_occupancy_cars:.1f}" if isinstance(avg_occupancy_cars, (int, float)) else "N/A")
             met_row2_cols[2].metric(label="Parked Area (m²)", value=f"{parked_area_sqm:.1f}" if isinstance(parked_area_sqm, (int, float)) else "N/A")
-            met_row2_cols[3].metric(label="# Occupied Areas", value=occupied_parking_areas_count)
+            met_row2_cols[3].metric(label="# Occupied Lots", value=occupied_parking_areas_count)
 
             try:
                  style_metric_cards(border_radius_px=10)
